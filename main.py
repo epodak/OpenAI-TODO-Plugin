@@ -21,11 +21,18 @@ async def add_todo(username):
     request_data = await request.get_json(force=True)
     if username not in _TODOS:
         _TODOS[username] = []
-    _TODOS[username].append(request_data["todo"])
+    todo = {
+        "名称": request_data.get("名称", ""),
+        "内容": request_data.get("内容", ""),
+        "时间": request_data.get("时间", ""),
+        "地点": request_data.get("地点", ""),
+    }
+    _TODOS[username].append(todo)
     with open(TODO_FILE, "w" , encoding="utf-8") as f:
         yaml.safe_dump(_TODOS, f, allow_unicode=True)
     print(f"Received POST request: {request_data}")
     return quart.Response(response='OK', status=200)
+
 
 @app.get("/todos/<string:username>")
 async def get_todos(username):
