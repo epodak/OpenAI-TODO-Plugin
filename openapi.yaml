@@ -82,13 +82,13 @@ components:
           type: object
           required: true
           properties:
-            名称:
+            name:
               type: string
-            内容:
+            content:
               type: string
-            时间:
+            time:
               type: string
-            地点:
+            place:
               type: string
     deleteTodoRequest:
       type: object
