@@ -79,9 +79,17 @@ components:
       - todo
       properties:
         todo:
-          type: string
-          description: The todo to add to the list.
+          type: object
           required: true
+          properties:
+            名称:
+              type: string
+            内容:
+              type: string
+            时间:
+              type: string
+            地点:
+              type: string
     deleteTodoRequest:
       type: object
       required:
