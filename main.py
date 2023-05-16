@@ -21,6 +21,7 @@ async def add_todo(username):
     request_data = await request.get_json(force=True)
     if username not in _TODOS:
         _TODOS[username] = []
+    # Change this line to handle the new todo format
     _TODOS[username].append(request_data["todo"])
     with open(TODO_FILE, "w" , encoding="utf-8") as f:
         yaml.safe_dump(_TODOS, f, allow_unicode=True)

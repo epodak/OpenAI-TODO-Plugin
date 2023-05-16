@@ -65,29 +65,25 @@ paths:
 
 components:
   schemas:
-    getTodosResponse:
-      type: object
-      properties:
-        todos:
-          type: array
-          items:
-            type: string
-          description: The list of todos.
     addTodoRequest:
       type: object
       required:
       - todo
       properties:
         todo:
-          type: string
+          type: object
           description: The todo to add to the list.
           required: true
-    deleteTodoRequest:
-      type: object
-      required:
-      - todo_idx
-      properties:
-        todo_idx:
-          type: integer
-          description: The index of the todo to delete.
-          required: true
+          properties:
+            name:
+              type: string
+              description: The name of the todo.
+            content:
+              type: string
+              description: The content of the todo.
+            time:
+              type: string
+              description: The time of the todo.
+            place:
+              type: string
+              description: The place of the todo.
