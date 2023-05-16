@@ -21,20 +21,15 @@ async def add_todo(username):
     request_data = await request.get_json(force=True)
     if username not in _TODOS:
         _TODOS[username] = []
-    todo_str = request_data["todo"]
-    todo_parts = todo_str.split(", ")
-    todo = {
-        "name": todo_parts[0].split(": ")[1],
-        "content": todo_parts[1].split(": ")[1],
-        "time": todo_parts[2].split(": ")[1],
-        "place": todo_parts[3].split(": ")[1],
-    }
-    _TODOS[username].append(todo)
-    with open(TODO_FILE, "w" , encoding="utf-8") as f:
-        yaml.safe_dump(_TODOS, f, allow_unicode=True)
-    print(f"Received POST request: {request_data}")
-    return quart.Response(response='OK', status=200)
-
+    todo = request_data["todo"]
+    if "name" in todo and "content" in todo and "time" in todo and "place" in todo:
+        _TODOS[username].append(todo)
+        with open(TODO_FILE, "w" , encoding="utf-8") as f:
+            yaml.safe_dump(_TODOS, f, allow_unicode=True)
+        print(f"Received POST request: {request_data}")
+        return quart.Response(response='OK', status=200)
+    else:
+        return quart.Response(response='Invalid todo format', status=400)
 
 @app.get("/todos/<string:username>")
 async def get_todos(username):
