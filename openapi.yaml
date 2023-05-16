@@ -68,12 +68,11 @@ components:
     addTodoRequest:
       type: object
       required:
-      - todo
+        - todo
       properties:
         todo:
           type: object
           description: The todo to add to the list.
-          required: true
           properties:
             name:
               type: string
@@ -87,3 +86,12 @@ components:
             place:
               type: string
               description: The place of the todo.
+    deleteTodoRequest:
+      type: object
+      required:
+        - todo_idx
+      properties:
+        todo_idx:
+          type: integer
+          description: The index of the todo to delete.
+
